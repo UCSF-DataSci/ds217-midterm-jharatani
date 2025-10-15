@@ -9,6 +9,8 @@ Hidden variables drive the realistic patterns:
 - Patient engagement level
 """
 
+#Enter pip install pandas matplotlib numpy into my terminal to install packages
+
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta

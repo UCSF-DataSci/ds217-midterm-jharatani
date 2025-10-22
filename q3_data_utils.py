@@ -226,4 +226,6 @@ if __name__ == '__main__':
     print("Summary statistics by site:")
     print(summary)
 
- 
+    df_final = df_typed2.copy()
+    df_final.to_csv('output/clinical_trial_cleaned.csv', index=False)
+    print("Cleaned data saved to 'output/clinical_trial_cleaned.csv'")

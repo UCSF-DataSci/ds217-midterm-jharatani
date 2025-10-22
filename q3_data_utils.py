@@ -27,6 +27,9 @@ def clean_data(df: pd.DataFrame, remove_duplicates: bool = True,
 
     if sentinel_value is not None:
         df_clean = df_clean.replace(sentinel_value, np.nan)
+
+    if "bmi" in df_clean.columns:
+        df_clean.loc[df_clean["bmi"] <= 0, "bmi"] = np.nan
    
     return df_clean
 
@@ -159,6 +162,8 @@ if __name__ == '__main__':
     df_filled = df_clean.copy()
     for col in df_filled.select_dtypes(include=['number']).columns:
         df_filled = fill_missing(df_filled, col, strategy='mean')
+
+        df_filled = df_filled.round(0)
     # ✅ check that filling works
     print("After filling missing column values:")
     print(detect_missing(df_filled))
@@ -209,23 +214,33 @@ if __name__ == '__main__':
     print("After binning, unique age bins:")
     print(df_binned['age_binned'].unique())
 
-    # Clean and standardize site names
-    df["site"] = (
-        df["site"]
-        .str.strip()          
-        .str.replace("_", " ")  
-        .str.replace(r"\s+", " ", regex=True)
-        .str.title()           
+# Clean and standardize site names and intervention groups
+    for col in ["site", "intervention_group"]:
+        df_filled[col] = (
+         df_filled[col]
+            .str.strip()
+            .str.replace("_", " ")
+            .str.replace(r"\s+", " ", regex=True)
+            .str.title()
     )
 
+# Apply custom fixes for intervention_group
+    df_filled["intervention_group"] = (
+        df_filled["intervention_group"]
+        .str.replace("Treatmenta", "Treatment A")
+        .str.replace("Treatmen A", "Treatment A")
+        .str.replace("Contrl", "Control")
+    )
+
+
     summary = summarize_by_group(
-        df, 'site',
+        df_filled, 'site',
         {'age': ['mean','std'], 'bmi': 'mean'}
     )
     # ✅ check that grouping and aggregation works
     print("Summary statistics by site:")
     print(summary)
 
-    df_final = df_typed2.copy()
+    df_final = df_filled.copy()
     df_final.to_csv('output/clinical_trial_cleaned.csv', index=False)
     print("Cleaned data saved to 'output/clinical_trial_cleaned.csv'")

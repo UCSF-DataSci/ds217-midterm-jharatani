@@ -56,7 +56,7 @@ def fill_missing(df: pd.DataFrame, column: str, strategy: str = 'mean') -> pd.Da
     else:
         raise ValueError("Unsupported strategy. Use 'mean', 'median', or 'ffill'.")
 
-    df[column] = df[column].fillna(fill_value)
+    df_filled[column] = df[column].fillna(fill_value)
     return df_filled
 
 

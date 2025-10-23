@@ -1,0 +1,14 @@
+intervention_group,outcome_cvd_mean_rate
+Control,0.1848966137249026
+Treatment A,0.16079494128274616
+Treatment B,0.16786355475763015
+intervention_group,mean_adherence_pct
+Control,60.6216884493112
+Treatment A,60.210173083716
+Treatment B,61.009404388714735
+
+=== Dropout Counts by Intervention Group ===
+intervention_group,No,Yes
+Control,2831,506
+Treatment A,2831,490
+Treatment B,2871,471

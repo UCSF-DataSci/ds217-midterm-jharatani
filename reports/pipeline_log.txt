@@ -1,18 +1,4 @@
 Starting clinical trial data pipeline...
 Running q4_exploration.ipynb...
-[NbConvertApp] Converting notebook q4_exploration.ipynb to notebook
-[NbConvertApp] Writing 122786 bytes to reports/q4_exploration_out.ipynb
-Finished q4_exploration.ipynb
-Running q5_missing_data.ipynb...
-[NbConvertApp] Converting notebook q5_missing_data.ipynb to notebook
-[NbConvertApp] Writing 65390 bytes to reports/q5_missing_data_out.ipynb
-Finished q5_missing_data.ipynb
-Running q6_transformation.ipynb...
-[NbConvertApp] Converting notebook q6_transformation.ipynb to notebook
-[NbConvertApp] Writing 15330 bytes to reports/q6_transformation_out.ipynb
-Finished q6_transformation.ipynb
-Running q7_aggregation.ipynb...
-[NbConvertApp] Converting notebook q7_aggregation.ipynb to notebook
-[NbConvertApp] Writing 59320 bytes to reports/q7_aggregation_out.ipynb
-Finished q7_aggregation.ipynb
-Pipeline complete!
+./q8_run_pipeline.sh: line 17: jupyter: command not found
+Error running q4_exploration.ipynb — pipeline stopped.

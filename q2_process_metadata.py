@@ -12,17 +12,26 @@ def parse_config(filepath: str) -> dict:
             if not line or line.startswith('#'):
                 continue
             key, value = line.split('=',1)
+            key = key.strip()
             value = value.strip()
 
-            if value.isdigit():
-                value = int(value) 
-            elif value.lower() in ('true', 'false'):
-                value = value.lower() == 'true'
-            else:
+            try:
+    # Try int first
+                value = int(value)
+            except ValueError:
                 try:
+        # Then try float
                     value = float(value)
                 except ValueError:
-                    pass
+                    if value.lower() in ('true', 'false'):
+                        value = value.lower() == 'true'
+                    else:
+                        if len(value) >= 2 and (
+                            (value[0] == value[-1] == '"') or (value[0] == value[-1] == "'")
+                        ):
+                            value = value[1:-1]
+                    
+
 
             config[key.strip()] = value
     return config

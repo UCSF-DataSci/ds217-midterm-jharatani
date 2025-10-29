@@ -85,25 +85,26 @@ def validate_config(config: dict) -> dict:
     min_val = to_int(config.get('sample_data_min'))
     max_val = to_int(config.get('sample_data_max'))
 
-    if isinstance(config.get('sample_data_rows'), int) and config['sample_data_rows'] > 0:
+    if rows is not None and rows > 0:
         results['sample_data_rows'] = True
     else:
         results['sample_data_rows'] = False
 
-    if isinstance(config.get('sample_data_min'), int) and config['sample_data_min'] >= 1:
+    # Check sample_data_min
+    if min_val is not None and min_val >= 1:
         results['sample_data_min'] = True
     else:
         results['sample_data_min'] = False
 
-    if isinstance(config.get('sample_data_max'), int):
-        if config['sample_data_max'] > config.get('sample_data_min', 0):
+    # Check sample_data_max
+    if max_val is not None:
+        if min_val is not None and max_val > min_val:
             results['sample_data_max'] = True
         else:
             results['sample_data_max'] = False
     else:
         results['sample_data_max'] = False
 
-    
     return results
 
 import random

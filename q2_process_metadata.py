@@ -75,6 +75,16 @@ def validate_config(config: dict) -> dict:
     """
     results = {}
 
+    def to_int(v):
+        try:
+            return int(str(v).strip())
+        except (TypeError, ValueError):
+            return None
+        
+    rows = to_int(config.get('sample_data_rows'))
+    min_val = to_int(config.get('sample_data_min'))
+    max_val = to_int(config.get('sample_data_max'))
+
     if isinstance(config.get('sample_data_rows'), int) and config['sample_data_rows'] > 0:
         results['sample_data_rows'] = True
     else:

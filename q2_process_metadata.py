@@ -1,4 +1,3 @@
-# TODO: Add shebang line: 
 #!/usr/bin/env python3
 
 # Assignment 5, Question 2: Python Data Processing
@@ -9,8 +8,23 @@ def parse_config(filepath: str) -> dict:
     config = {}
     with open(filepath, 'r') as file:
         for line in file:
-            key, value = line.strip().split('=')
-            config[key] = value
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            key, value = line.split('=',1)
+            value = value.strip()
+
+            if value.isdigit():
+                value = int(value) 
+            elif value.lower() in ('true', 'false'):
+                value = value.lower() == 'true'
+            else:
+                try:
+                    value = float(value)
+                except ValueError:
+                    pass
+
+            config[key.strip()] = value
     return config
     
     """

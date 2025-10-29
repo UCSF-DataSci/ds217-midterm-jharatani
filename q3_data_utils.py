@@ -74,7 +74,7 @@ def filter_data(df: pd.DataFrame, filters: list) -> pd.DataFrame:
 
         if cond == 'equals':
             df_filtered = df_filtered[df_filtered[col] == val]
-        elif cond == 'greater':
+        elif cond == 'greater_than':
             df_filtered = df_filtered[df_filtered[col] > val]
         elif cond == 'less':
             df_filtered = df_filtered[df_filtered[col] < val]
@@ -172,7 +172,7 @@ if __name__ == '__main__':
     df_filtered = filter_data(
         df_filled,
         filters=[
-            {'column': 'age', 'condition': 'greater', 'value': 18},
+            {'column': 'age', 'condition': 'greater_than', 'value': 18},
             {'column': 'age', 'condition': 'less', 'value': 65},
             {'column': 'site', 'condition': 'in_list', 'value': ['Site A','Site C', 'Site E']},
         ]

@@ -29,7 +29,8 @@ def clean_data(df: pd.DataFrame, remove_duplicates: bool = True,
         df_clean = df_clean.replace(sentinel_value, np.nan)
 
     if "bmi" in df_clean.columns:
-        df_clean.loc[df_clean["bmi"] <= 0, "bmi"] = np.nan
+        df_clean.loc[df_clean["bmi"] <= 0, "bmi"] = np.nan #Found -1 BMI value later in analysis and came back to account for this in cleaning
+
    
     return df_clean
 
